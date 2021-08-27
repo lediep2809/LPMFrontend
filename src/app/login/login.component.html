@@ -1,43 +1,43 @@
-<div class="main">
-    <!-- Sing in  Form -->
-    <section class="sign-in">
+<section id="loginPage">
+    <div class="BG">
         <div class="container">
-            <div class="signin-content">
-                <div class="signin-image">
-                    <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
-                    <a href="#" class="signup-image-link">Create an account</a>
-                </div>
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                        <div class="card-img-left d-none d-md-flex">
+                            <!-- Background image for card set in CSS! -->
+                        </div>
+                        <div class="card-body p-4 p-sm-5">
+                            <h5 class="card-title text-center mb-5 fw-light fs-1">Login</h5>
+                            <!-- Sign In Form -->
+                            <form [formGroup]="login" #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit()">
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName='username' required />
+                                    <label for="floatingInput">Email address</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName='password' required />
+                                    <label for="floatingPassword">Password</label>
+                                </div>
+                                <router-outlet></router-outlet>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck" />
+                                    <label class="form-check-label" for="rememberPasswordCheck"> Remember password </label>
+                                </div>
 
-                <div class="signin-form">
-                    <h2 class="form-title">Sign up</h2>
-                    <form method="POST" class="register-form" id="login-form">
-                        <div class="form-group">
-                            <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="your_name" id="your_name" placeholder="Your Name" />
+                                <div class="d-grid">
+                                    <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit" [disabled]="!login.valid">
+                                    Login
+                                    </button>
+                                    <div class="text-center">
+                                        <a class="small" href="#">Forgot password?</a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
-                            <input type="password" name="your_pass" id="your_pass" placeholder="Password" />
-                        </div>
-                        <div class="form-group">
-                            <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
-                            <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
-                        </div>
-                        <div class="form-group form-button">
-                            <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
-                        </div>
-                    </form>
-                    <div class="social-login">
-                        <span class="social-label">Or login with</span>
-                        <ul class="socials">
-                            <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                            <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                            <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-</div>
+    </div>
+</section>

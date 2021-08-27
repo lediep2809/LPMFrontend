@@ -1,0 +1,25 @@
+/* Show red borders when filled, but invalid */
+
+#modaladd input:not(:placeholder-shown) {
+    border-color: hsl(0, 76%, 50%);
+    ;
+}
+
+
+/* Show green borders when valid */
+
+#modaladd input:valid {
+    border-color: hsl(120, 76%, 50%);
+}
+
+#modaledit input:not(:placeholder-shown) {
+    border-color: hsl(0, 76%, 50%);
+    ;
+}
+
+
+/* Show green borders when valid */
+
+#modaledit input:valid {
+    border-color: hsl(120, 76%, 50%);
+}

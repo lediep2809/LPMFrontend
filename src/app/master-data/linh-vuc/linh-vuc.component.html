@@ -1,1 +1,195 @@
-<p>linh-vuc works!</p>
+<section class="panel">
+
+    <div class="panel-body">
+        <h5 class="mt-2 mb-2">Bộ lọc</h5>
+
+        <div class="input-group mt-2 mb-2">
+            <input type="text" class="form-control" name="searchText" (input)="Search() " />
+            <button type="button" class="btn btn-info ">
+              <i class='bx bx-search'></i>
+            </button>
+        </div>
+        <h5 class="mt-3 mb-3">Danh sách {{Ma}}</h5>
+        <div>
+
+            <!-- Modal add -->
+            <div class="modal fade" id="modaladd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-danger" id="">Thêm mới lĩnh vực</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="">
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Mã lĩnh vực *</label>
+                                    <input type="" class="form-control" #Ma aria-describedby="emailHelp" required pattern="\S+.*">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Tên lĩnh vực *</label>
+                                    <input type="" class="form-control" #Ten required pattern="\S+.*">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Mô tả</label>
+                                    <input type="" class="form-control" #Mota>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Trạng thái *</label>
+                                    <select class="form-select" aria-label="Default select example" #Trangthai>
+                                    <option value="1" >Hoạt động</option>
+                                    <option value="0" >Không hoạt động</option>
+                                  </select>
+                                </div>
+                                <button class="btn btn-primary" (click)="Add(Ma.value, Ten.value, Mota.value, Trangthai.value );">
+                                 Lưu</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <fieldset>
+                <label class="float-left">Hiển thị
+              <select  class="form-control form-control-sm d-inline-block width-100 p-right-25 pl-4 mx-1 ng-untouched ng-pristine ng-valid">
+                <option class="ng-star-inserted">10</option>
+                <option class="ng-star-inserted">20</option>
+                <option class="ng-star-inserted">50</option>
+                <option class="ng-star-inserted">100</option><!---->
+                </select>
+
+              </label>
+                <label class="float-right">
+                <button type="button" class="btn btn-sm btn-success mr-1 mb-1" data-bs-toggle="modal" data-bs-target="#modaladd">
+                <i  class="fa ft-plus-circle mr-1"></i>Thêm mới
+              </button>
+              </label>
+            </fieldset>
+            <table class="table table-bordered table-striped mb-none" id="datatable-details">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>STT</th>
+                        <th>Mã Lĩnh Vực</th>
+                        <th>Tên Lĩnh Vực</th>
+                        <th>Mô Tả</th>
+                        <th>Trạng Thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of datas ;let i = index">
+                    <tr class="">
+                        <td scope="row">
+                            <button type="button" class="master-button" *ngIf="item.collapsed" (click)="item.collapsed = !item.collapsed">
+                      <i class='bx bx-chevron-down'></i>
+                    </button>
+                            <button type="button" class="master-button" *ngIf="!item.collapsed" (click)="item.collapsed = !item.collapsed">
+                      <i class='bx bx-chevron-right' ></i>
+                    </button>
+
+                        </td>
+                        <td>{{i+1}}</td>
+                        <td>{{item.mA_LINH_VUC}}</td>
+                        <td>{{item.teN_LINH_VUC}}</td>
+                        <td>{{item.mO_TA}}</td>
+                        <td>{{item.tranG_THAI}}
+                            <!-- <div *ngif="item.tranG_THAI==1" class="d-flex align-items-end justify-content-center" style="margin-left: 0px;">
+
+                                <div title="Hoạt động" class="badge bg-success ng-star-inserted"> Hoạt động </div>
+
+                            </div>
+                            <div *ngif="item.tranG_THAI=='0'" class="d-flex align-items-end justify-content-center" style="margin-left: 0px;">
+                                <div title="Hoạt động" class="badge bg-danger ng-star-inserted"> Không Hoạt động </div>
+                            </div> -->
+                        </td>
+
+                        <td class=" d-flex align-items-end justify-content-center">
+                            <button type="button" class="master-button" data-bs-toggle="modal" id='btnedit_{{i}}' (click)="test(item)">
+                          <i class='bx bx-edit'></i>
+                            </button>
+                            <button data-bs-toggle="modal" data-bs-target="#modaldelete" id='btndelete_{{i}}' (click)="Modaldelete(i)">
+                              <i class='bx bx-trash'></i></button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="item.collapsed" style="text-align: center; background-color: rgba(0, 0, 0,  0.015)">
+                        <td colspan="100%" style="border: 0 !important">
+                            <table class="table table-strip">
+                                <thead class="black white-text">
+                                    <tr>
+                                        <th *ngFor="let head of " scope="col">{{ head }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{item.mA_LINH_VUC}}</td>
+                                        <td>{{item.teN_LINH_VUC}}</td>
+                                        <td>{{item.mO_TA}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Modal edit-->
+                    <div class="modal fade" #testModal id='edit_{{i}}' tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-danger" id="exampleModalLabel">Sửa lĩnh vực</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Mã lĩnh vực *</label>
+                                            <input type="" class="form-control" value="{{item.mA_LINH_VUC}}" #Ma required pattern="\S+.*">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Tên lĩnh vực *</label>
+                                            <input type="" class="form-control" value="{{item.teN_LINH_VUC}}" #Ten required pattern="\S+.*">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Mô tả</label>
+                                            <input type="" class="form-control" value="{{item.mO_TA}}" #Mota>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Trạng thái *</label>
+                                            <select class="form-select" aria-label="Default select example" #Trangthai>
+                                              <option value="1">Hoạt động</option>
+                                              <option value="0">Không hoạt động</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" (click)="Edit(i,Ma.value, Ten.value, Mota.value, Trangthai.value );">Lưu</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal delete -->
+                    <div class="modal fade" id="delete_{{i}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-danger" id="exampleModalLabel">Xác nhận</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Bạn có chắc muốn xóa không?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Đóng</button>
+                                    <button type="submit" class="btn btn-primary" (click)="Delete(i);">Đồng ý</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tbody>
+            </table>
+
+
+
+
+        </div>
+    </div>
+</section>
