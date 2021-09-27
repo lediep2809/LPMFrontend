@@ -1,28 +1,25 @@
 <div class="{{ switch }} body">
-
     <header class="header bg-light">
         <div class="header__container">
 
             <div class="dropdown header__dropdown">
                 <div class="row">
                     <div class="col pr-user">
-                        <span class="text-end  ">Xin chào, nguyenvane - Nguyễn Văn E</span>
+                        <span class="text-end  ">Xin chào, {{currentUser.username}} - {{currentUser.firstName}} {{currentUser.lastName}}</span>
                         <span class="text-end ">Đơn vị: Tỉnh Tây Ninh</span>
                     </div>
                     <div class="col col-lg-2">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://ilis-lpm.vnpt.vn/assets/img/portrait/small/avatar-s-28.png" alt="" class="header__img" />
-                        </a>
-
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Tài Khoản</a></li>
-                            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
-
-                        </ul>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                <img src="https://ilis-lpm.vnpt.vn/assets/img/portrait/small/avatar-s-28.png" alt="" class="header__img" />
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Tài Khoản</a></li>
+                                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-
             </div>
 
             <div class="header__search">
@@ -53,7 +50,6 @@
         /></div
     ></span>
                 </a>
-
                 <div class="nav__list">
                     <div class="nav__items">
                         <h3 class="nav__subtitle">Profile</h3>
@@ -128,5 +124,5 @@
     <main>
         <router-outlet></router-outlet>
     </main>
-
+    <app-footer></app-footer>
 </div>

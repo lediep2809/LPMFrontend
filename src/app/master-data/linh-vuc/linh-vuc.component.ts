@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LinhVuc } from 'src/app/_models/LinhVuc';
+import { LinhVuc, Pagination } from 'src/app/_models/LinhVuc';
 import {LinhVucService} from 'src/app/_Service/linhvuc.service' ;
 import * as bootstrap from 'bootstrap';
 
@@ -12,14 +12,17 @@ import * as bootstrap from 'bootstrap';
 export class LinhVucComponent implements OnInit {
   public Stt:string =""
   datas:LinhVuc[]=[];
+  pagedItems:Pagination[]=[];
   LinhvucService: any;
   searchText: string="";
+  // pager object
+  pagerend: any ;
   constructor(private linhvucService: LinhVucService) {
    }
 
   ngOnInit(): void {
     this.searchText;
-    this.getAll();
+    this.getPage(1,5);
   }
 
   Modaledit(id: number): void {
@@ -41,7 +44,6 @@ export class LinhVucComponent implements OnInit {
   getAll(){
     this.linhvucService.getAll().subscribe((res:any)=>{
       this.datas = res;
-    console.log(this.datas)
     })
   }
 
@@ -100,7 +102,7 @@ export class LinhVucComponent implements OnInit {
   Delete(id: number): void {
     const ID = Number(this.datas[id].id);
     this.linhvucService.Delete(ID).subscribe(
-    (data: any) => {
+    () => {
       window.location.href = "/home/linh-vuc";
     },status => {
      console.log(status.status);
@@ -116,18 +118,15 @@ export class LinhVucComponent implements OnInit {
       return res.mA_LINH_VUC?.toLocaleLowerCase().match(this.searchText.toLocaleLowerCase());
     } )
   }
-  test(item:any){
-    console.log(item);
-    // this.linhvucService.Delete(ID).subscribe(
-    // (data: any) => {
-    //   window.location.href = "/home/linh-vuc";
-    // },status => {
-    //  console.log(status.status);
-    //  if(status.status == 404 ){
-    //   window.alert("có lỗi sảy ra");
-    //   window.location.href = "/home/linh-vuc";
-    //  }
-
-    //  })
+  getPage(pageNumber:number,pageSize: number){
+    this.linhvucService.getPage(pageNumber,pageSize).subscribe((res:any)=>{
+      this.pagedItems = res;
+      this.datas =res.linhvuc;
+      this.pagerend=res.totalPages;
+      console.log(this.pagedItems);
+    }
+    )
   }
+
+
 }

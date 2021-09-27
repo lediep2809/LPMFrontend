@@ -10,13 +10,13 @@
                         <div class="card-body p-4 p-sm-5">
                             <h5 class="card-title text-center mb-5 fw-light fs-1">Login</h5>
                             <!-- Sign In Form -->
-                            <form [formGroup]="login" #userForm="ngForm" (ngSubmit)="userForm.form.valid && onSubmit()">
+                            <form [formGroup]="loginForm" #userForm="ngForm" (ngSubmit)="onSubmit()">
                                 <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName='username' required />
+                                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName='username' [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName='password' required />
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName='password' [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                                     <label for="floatingPassword">Password</label>
                                 </div>
                                 <router-outlet></router-outlet>
@@ -26,8 +26,9 @@
                                 </div>
 
                                 <div class="d-grid">
-                                    <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit" [disabled]="!login.valid">
-                                    Login
+                                    <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" type="submit" [disabled]="loading">
+                                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                      Login
                                     </button>
                                     <div class="text-center">
                                         <a class="small" href="#">Forgot password?</a>

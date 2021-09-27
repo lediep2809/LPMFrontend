@@ -23,6 +23,9 @@ export class LinhVucService {
   getAll():Observable<LinhVuc[]>{
     return this.httpClient.get<LinhVuc[]>(`${apiUrl}/search`);
   }
+  getPage(pageNumber:number, pageSize :number):Observable<LinhVuc[]>{
+    return this.httpClient.get<LinhVuc[]>(`${apiUrl}/get?pageNumber=${pageNumber}&pageSize=${pageSize}`);
+  }
 
   Creat(newLinhvuc : LinhVuc) : Observable<LinhVuc>{
     return this.httpClient.post(`${apiUrl}/Add`, newLinhvuc , httpOptions);

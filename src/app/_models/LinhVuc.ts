@@ -7,3 +7,16 @@ export class LinhVuc{
   collapsed?:boolean;
   modal?:boolean;
 }
+
+export interface Pagination {
+  currentPage: number;
+  pageSize: number;
+  totalCount: number;
+  totalPages: number;
+  LinhVuc: LinhVuc;
+}
+
+export class PaginatedResult<T>{
+  resut?: T;
+  pagination?: Pagination ;
+}
